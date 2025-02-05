@@ -1,0 +1,30 @@
+name: CI workflow cypress
+
+on: pull_request
+
+jobs:
+  ci_cypress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Install
+        run: npm install --legacy-peer-deps
+
+      - name: E2E Tests
+        run: npm run test:e2e:ci
+
+      - name: Upload screenshots when specs fail
+        if: ${{ failure() }}
+        uses: actions/upload-artifac@v4
+        with:
+          name: screenshots
+          path: ./cypress/screenshots
+
+      - name: Upload videos when specs fail
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: videos
+          path: ./cypress/videos
