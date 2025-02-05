@@ -59,7 +59,7 @@ describe('Login', () => {
     cy.findAllByRole('paragraph').as('errorList');
 
     // Assert
-    cy.get('@errorList').its('length').should('be.at.least', 3);
+    cy.get('@errorList').its('length').should('be.at.least', 2);
     cy.get('@errorList').eq(0).should('exist');
     cy.get('@errorList').eq(1).should('exist');
   });

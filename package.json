@@ -11,7 +11,7 @@
     "analyze": "npm run clean && npm run type-check && webpack --config ./config/webpack/analyze.js",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "test": "jest -c ./config/test/jest.js --verbose",
+    "test": "jest -c ./config/test/jest.js --verbose --testPathIgnorePatterns \"<rootDir>/cypress/*\"",
     "test:watch": "npm run test -- --watchAll -i",
     "clean": "rimraf dist",
     "start:e2e": "cypress open",

@@ -3,14 +3,36 @@ name: CI workflow
 on: push
 
 jobs:
-  ci:
+  jest:
+    name: Pruebas unitarias con Jest
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-
       - name: Install
         run: npm install --legacy-peer-deps
-
-      - name: Unit Tests
+      - name: Tests unitarios
         run: npm test
+
+  cypress:
+    name: Pruebas E2E con Cypress
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Install
+        run: npm install --legacy-peer-deps
+      - name: Tests E2E
+        run: npm run test:e2e:ci
+      - name: Subir screenshots cuando falla el test
+        if: ${{failure()}}
+        uses: actions/upload-artifac@v4
+        with:
+          name: screenshots
+          path: ./cypress/screenshots
+      - name: Subir videos cuando falla el test
+        if: ${{failure()}}
+        uses: actions/upload-artifact@v4
+        with:
+          name: videos
+          path: ./cypress/videos
