@@ -1,6 +1,6 @@
 name: CI workflow cypress
 
-on: pull_request
+on: push
 
 jobs:
   ci_cypress:
