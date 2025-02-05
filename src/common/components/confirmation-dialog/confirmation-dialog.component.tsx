@@ -28,7 +28,6 @@ export const ConfirmationDialogComponent: React.FunctionComponent<Props> = (
 
   const handleAccept = () => {
     onAccept();
-    onClose();
   };
 
   return (
